@@ -38,7 +38,7 @@ function TokenComponent({ client_id, client_secret, onTokenReceived }) {
     return <div>Error: {error}</div>;
   }
 
-  return null; // No need to render anything here
+  return null;
 }
 
 export default TokenComponent;
