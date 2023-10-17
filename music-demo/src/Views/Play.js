@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import '../App.css';
-import Context from '../context'
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -9,10 +8,9 @@ import { Link } from 'react-router-dom';
 
 
 const Play = () => {
-    const { context, setContext } = useContext(Context)
-    const { title, artistName, id, img } = useParams();
+    const { title, artistName, id, img } = useParams(); //Use this to grab more spotify data
     const theme = useTheme();
-    
+     
     return (
         <>
             <div className="Play">
@@ -25,6 +23,7 @@ const Play = () => {
                     </Link>
                 </header>
 
+                {/* Embedded Player */}
                 <iframe src={`https://open.spotify.com/embed/track/${id}`} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </>

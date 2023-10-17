@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// Tile Component - Tiles Spotify Results
+
+import React, { useState, useEffect, Component } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,20 +9,22 @@ import Grow from '@mui/material/Grow';
 import { Link } from 'react-router-dom';
 
 const Tile = ({ index, data }) => {
-    const [isTileVisible, setIsTileVisible] = useState(false);
+    const [isTileVisible, setIsTileVisible] = useState(false); // For tile visibility
 
     useEffect(() => {
+        // Tile becomes visible
         setIsTileVisible(true);
     }, []);
 
     if (data.tracks && Array.isArray(data.tracks.items) && data.tracks.items[index]) {
+        // Spotify data
         const title = data.tracks.items[index].name;
         const artist = data.tracks.items[index].artists[0].name;
         const id = data.tracks.items[index].id;
         const cover = data.tracks.items[index].album.images[1]?.url;
 
         if (cover) {
-            const modifiedCover = cover.replace(/^https:\/\/i\.scdn\.co\/image\//, '');
+            const modifiedCover = cover.replace(/^https:\/\/i\.scdn\.co\/image\//, ''); //Only grab most identifiable part of the URL
 
             return (
                 <Grow in={isTileVisible} timeout={1000}>
@@ -53,9 +57,12 @@ const Tile = ({ index, data }) => {
         }
     }
     
+    // This div appears in the event there is no data
     return <div>No data available</div>;
 };
 
+// This displays a max of 12 tiles, can be edited to be more dynamic
+// Possibly add a 'Load More' button
 const Tiles = ({ data }) => {
     return (
         <>

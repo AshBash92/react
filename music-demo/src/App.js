@@ -9,10 +9,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
   const [context, setContext] = useState({
-    client_id: "CLIENT_ID",
-    client_secret: "CLIENT_SECRET",
-    access_token: null,
-    route: 'Search',
+    // You need to have a Spotify account and create an app on their dashboard
+    client_id: "CLIENT_ID",                             // Put Spotify client_id here
+    client_secret: "CLIENT_SECRET",                     // Put Spotify client_sercret here
+    access_token: null,                                 // Initializes access_token to be fetched later
+    route: 'Search',                                    // Home page set to 'Search'
   });
 
   const handleTokenReceived = (token) => {
@@ -24,16 +25,20 @@ const App = () => {
 
   return (
     <Context.Provider value={{ context, setContext }}>
+
+      {/* Token Component - fetches and passes the Access Token */}
       <TokenComponent
         client_id={context.client_id}
         client_secret={context.client_secret}
         onTokenReceived={handleTokenReceived}
       />
+
+      {/* Router Setup - use this to navigate to other views */}
       <BrowserRouter>
         <Routes>
-          <Route path="/search" element={<Search />} />
-          <Route path="/play/:title/:artist/:id/:img" element={<Play />} />
-          <Route path="/*" element={<Search />} />
+          <Route path="/search" element={<Search />} />                       {/* Route for the 'Search' view */}
+          <Route path="/play/:title/:artist/:id/:img" element={<Play />} />   {/* Route for the 'Play' view */}
+          <Route path="/*" element={<Search />} />                            {/* Default route is 'Search' */}
         </Routes>
       </BrowserRouter>
     </Context.Provider>

@@ -1,9 +1,12 @@
+// Token Component - Provides Access Token needed to use the Spotify API
+
 import React, { useState, useEffect } from 'react';
 
 function TokenComponent({ client_id, client_secret, onTokenReceived }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    //This function is responsible for fetching access token
     const getToken = async () => {
       const url = 'https://accounts.spotify.com/api/token';
       const data = new URLSearchParams();
@@ -34,9 +37,10 @@ function TokenComponent({ client_id, client_secret, onTokenReceived }) {
     getToken();
   }, [client_id, client_secret, onTokenReceived]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // If error, display on screen
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   return null;
 }

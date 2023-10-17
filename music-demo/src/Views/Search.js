@@ -9,25 +9,29 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const Search = () => {
     const { context, setContext } = useContext(Context);
-    const [searchInput, setSearchInput] = useState('');
-    const [spotifyData, setSpotifyData] = useState(null);
+    const [searchInput, setSearchInput] = useState('');     //handleInputChange
+    const [spotifyData, setSpotifyData] = useState(null);   // getData
 
+    // Search Input Field
     const handleInputChange = (event) => {
         setSearchInput(event.target.value);
     };
 
+    // Search fires when 'Enter' is pressed
     const handleSearch = (event) => {
         if (event.key === 'Enter') {
             getData(context.access_token, searchInput);
         }
     };
 
+    // Fetches Spotify Data - Albums, Artists, Tracks
     const getData = async (accessToken, searchInput) => {
-        const sanitizedSearchInput = searchInput.replace(/ /g, "+");
+        const sanitizedSearchInput = searchInput.replace(/ /g, "+");    //Replace the spaces with '+'for URL use
         const apiUrl = 'https://api.spotify.com/v1/search?q=' + sanitizedSearchInput + '&type=album%2Ctrack%2Cartist&market=US&limit=12&offset=4&sort=popularity';
+        // Can edit the URL to fetch less data
 
         const headers = {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}` //Access token
         };
 
         try {
@@ -69,6 +73,7 @@ const Search = () => {
                             InputLabelProps={{ style: {color: 'white'} }}
                         />
                     </Box>
+                    {/* Tiles show up after search fires */}
                     {spotifyData && <Tiles data={spotifyData} />}
                 </header>
             </div>
