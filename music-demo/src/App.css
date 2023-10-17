@@ -2,8 +2,11 @@
   text-align: center;
 }
 
+body {
+  background: linear-gradient(25deg, #402565 5%, #30BE96);
+}
+
 .Search-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,7 +31,6 @@
 }
 
 .Play {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

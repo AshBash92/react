@@ -9,8 +9,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
   const [context, setContext] = useState({
-    client_id: "abab7da00b4e4f12853c6732d72612c1",
-    client_secret: "71e033f845364f63b0debc4885ca047c",
+    client_id: "CLIENT_ID",
+    client_secret: "CLIENT_SECRET",
     access_token: null,
     route: 'Search',
   });

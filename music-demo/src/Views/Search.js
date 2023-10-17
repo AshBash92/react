@@ -5,6 +5,7 @@ import Context from '../context';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const Search = () => {
     const { context, setContext } = useContext(Context);
@@ -50,7 +51,11 @@ const Search = () => {
         <>
             <div className="Search">
                 <header className="Search-header">
-                    <h1>Ongaku</h1>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <h1 style={{margin: '0px'}}>Ongaku</h1>
+                        <MusicNoteIcon sx={{ color: 'white', mr: 1, my: 0.5 }} />
+                    </Box>
+                    <h6 style={{marginTop: '0px'}}>music to your ears</h6>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
                         <SearchIcon sx={{ color: 'white', mr: 1, my: 0.5 }} />
                         <TextField

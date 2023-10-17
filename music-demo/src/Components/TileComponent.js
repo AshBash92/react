@@ -1,48 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Grow from '@mui/material/Grow';
 import { Link } from 'react-router-dom';
 
+const Tile = ({ index, data }) => {
+    const [isTileVisible, setIsTileVisible] = useState(false);
 
-const Tile = ({index, data}) => {
+    useEffect(() => {
+        setIsTileVisible(true);
+    }, []);
+
     if (data.tracks && Array.isArray(data.tracks.items) && data.tracks.items[index]) {
         const title = data.tracks.items[index].name;
         const artist = data.tracks.items[index].artists[0].name;
         const id = data.tracks.items[index].id;
-        const cover = data.tracks.items[index].album.images[1].url;
-        const modifiedCover = cover.replace(/^https:\/\/i\.scdn\.co\/image\//, '');
+        const cover = data.tracks.items[index].album.images[1]?.url;
 
-        return (
-            <Link style={{textDecoration: 'none'}} to={`/play/${title}/${artist}/${id}/${modifiedCover}`}>
-                <Card className='tile' sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                        sx={{ height: 250 }}
-                        image={cover}
-                    />
-                    <CardContent>
-                        <Typography 
-                            gutterBottom variant="h5" 
-                            component="div" 
-                            style={{
-                                maxWidth: '30vw',
-                                whiteSpace: 'nowrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis'
-                            }}>
-                            {title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        {artist}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Link>
-        );
-    } else {
-        return <div>No data available</div>;
+        if (cover) {
+            const modifiedCover = cover.replace(/^https:\/\/i\.scdn\.co\/image\//, '');
+
+            return (
+                <Grow in={isTileVisible} timeout={1000}>
+                    <Link style={{ textDecoration: 'none' }} to={`/play/${title}/${artist}/${id}/${modifiedCover}`}>
+                        <Card className='tile' sx={{ maxWidth: 345 }}>
+                            <CardMedia
+                                sx={{ height: 275 }}
+                                image={cover}
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom variant="h5"
+                                    component="div"
+                                    style={{
+                                        maxWidth: '30vw',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>
+                                    {title}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {artist}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                </Grow>
+            );
+        }
     }
+    
+    return <div>No data available</div>;
 };
 
 const Tiles = ({ data }) => {
