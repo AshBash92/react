@@ -10,8 +10,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 const App = () => {
   const [context, setContext] = useState({
     // You need to have a Spotify account and create an app on their dashboard
-    client_id: "abab7da00b4e4f12853c6732d72612c1",      // Put Spotify client_id here
-    client_secret: "b3995e1b6c9e4fbfb1a9460681c1be19",  // Put Spotify client_sercret here
+    client_id: "CLIENT_ID",      // Put Spotify client_id here
+    client_secret: "CLIENT_SECRET",  // Put Spotify client_sercret here
     access_token: null,                                 // Initializes access_token to be fetched later
     route: 'Search',                                    // Home page set to 'Search'
   });
