@@ -64,7 +64,7 @@ const Search = () => {
                         <SearchIcon sx={{ color: 'white', mr: 1, my: 0.5 }} />
                         <TextField
                             id="searchBar" 
-                            label="Search for Album" 
+                            label="Search for a Track" 
                             variant="standard" 
                             value={searchInput}
                             onKeyPress={handleSearch}
